@@ -16,7 +16,7 @@ def test_create_user():
     assert not user.is_superuser
 
 
-@pytest.mark.django.db
+@pytest.mark.django_db
 def test_create_super_user():
     User = get_user_model()
     admin_user = User.objects.create_superuser(
