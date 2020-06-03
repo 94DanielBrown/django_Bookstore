@@ -1,7 +1,13 @@
 from django.contrib.auth import get_user_model
+from django.urls import reverse, resolve
 import pytest
+from .views import SignUpPageView
 
 
+from . import forms
+
+
+# User creation tests
 @pytest.mark.django_db
 def test_create_user():
     User = get_user_model()
@@ -28,3 +34,31 @@ def test_create_super_user():
     assert admin_user.email == 'superadmin@email.com'
     assert admin_user.is_active
     assert admin_user.is_superuser
+
+
+# Sign Up tests
+@pytest.fixture
+def response(client):
+    url = reverse('signup')
+    response = client.get(url)
+    return response
+
+
+def test_signup_template(response):
+    assert response.status_code == 200
+    assert 'registration/signup.html' in (t.name for t in response.templates)
+    assert 'Sign Up' in str(response.content)
+    assert 'Some silly string' not in str(response.content)
+
+
+@pytest.mark.django_db
+def test_signup_form():
+    data = {'email': 'bgates@microsoft.com', 'username': 'bgates',
+            'password1': 'randomstring456', 'password2': 'randomstring456'}
+    Form = forms.CustomUserCreationForm(data=data)
+    assert Form.is_valid() is True
+
+
+def test_signup_view(client):
+    response = resolve('/accounts/signup/')
+    assert response.func.__name__ == SignUpPageView.as_view().__name__
