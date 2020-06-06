@@ -1,4 +1,4 @@
-<!-- templates/regitration/login.html -->
+<!-- templates/account/login.html -->
 {% extends '_base.html' %}
 {% load socialaccount %}
 {% providers_media_js %}
@@ -14,5 +14,8 @@
         {{ form|crispy}}
         <button class="btn btn-success" type="submit">Log In</button>
 </form>
+<a href="{% url 'account_reset_password' %}">Can't remember your password</a>
+<br/>
+<br/>
 <a href="{% provider_login_url "google" %}">Log in with Google</a>
 {% endblock content %}
