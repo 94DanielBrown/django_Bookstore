@@ -6,6 +6,9 @@ services:
     command: python /code/manage.py runserver 0.0.0.0:8000
     environment:
       - POSTGRES_PASSWORD=postgres
+      - SECRET_KEY=f2(8-sa(2cwfoy$trgp)(__esbfd*$$*6wgzum0@y9)nplk99#o
+        # Double dollar $$ used to represent $ 
+      - DEBUG=1
     volumes:
       - .:/code
     ports:
