@@ -1,5 +1,7 @@
 <!-- templates/regitration/login.html -->
 {% extends '_base.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
 {% load crispy_forms_tags %}
 
 
@@ -12,4 +14,5 @@
         {{ form|crispy}}
         <button class="btn btn-success" type="submit">Log In</button>
 </form>
+<a href="{% provider_login_url "google" %}">Log in with Google</a>
 {% endblock content %}

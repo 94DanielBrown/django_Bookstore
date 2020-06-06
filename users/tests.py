@@ -1,10 +1,10 @@
 from django.contrib.auth import get_user_model
-from django.urls import reverse, resolve
+from django.urls import reverse  # , resolve
 import pytest
-from .views import SignUpPageView
+# from .views import SignUpPageView
 
 
-from . import forms
+# from . import forms
 
 
 # User creation tests
@@ -39,18 +39,19 @@ def test_create_super_user():
 # Sign Up tests
 @pytest.fixture
 def response(client):
-    url = reverse('signup')
+    url = reverse('account_signup')
     response = client.get(url)
     return response
 
 
 def test_signup_template(response):
     assert response.status_code == 200
-    assert 'registration/signup.html' in (t.name for t in response.templates)
+    assert 'account/signup.html' in (t.name for t in response.templates)
     assert 'Sign Up' in str(response.content)
     assert 'Some silly string' not in str(response.content)
 
 
+""" NOT REQUIRED WITH allauth as uses it's own view and form
 @pytest.mark.django_db
 def test_signup_form():
     data = {'email': 'bgates@microsoft.com', 'username': 'bgates',
@@ -62,3 +63,4 @@ def test_signup_form():
 def test_signup_view(client):
     response = resolve('/accounts/signup/')
     assert response.func.__name__ == SignUpPageView.as_view().__name__
+    """

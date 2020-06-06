@@ -6,7 +6,7 @@ from django.urls import path, include
 
 urlpatterns = [
     # User management
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('allauth.urls')),
 
     # Django admin
     path('admin/', admin.site.urls),
