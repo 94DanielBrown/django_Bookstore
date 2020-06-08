@@ -12,6 +12,8 @@ django-pytest = "*"
 pytest-django = "*"
 django-crispy-forms = "*"
 django-allauth = "*"
+pytest-docker-db = "*"
+pytest-env = "*"
 
 [requires]
 python_version = "3.7"

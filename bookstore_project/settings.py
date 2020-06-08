@@ -1,5 +1,4 @@
 # Django settings for bookstore_project project.
-
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -33,6 +32,7 @@ INSTALLED_APPS = [
     # Local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
+    'books.apps.BooksConfig',
 
     # Third party
     'crispy_forms',
@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'db',
+        'HOST': '172.20.0.2',
         'PORT': 5432
     }
 }

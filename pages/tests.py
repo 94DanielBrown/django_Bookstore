@@ -1,6 +1,4 @@
 # pages/tests
-
-
 import pytest
 from django.urls import reverse, resolve
 from .views import HomePageView, AboutPageView

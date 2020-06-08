@@ -14,6 +14,9 @@ services:
       - 8000:8000
     depends_on:
       - db
+    networks:
+      testing_net:
+        ipv4_address: 172.20.0.3
 
   db:
     image: postgres:11
@@ -23,3 +26,14 @@ services:
       - 5432:5432
     volumes:
       - ~/docker_volumes/postgres_bookstore:/var/lib/postgresql/data/
+# Set ip so the ip can be set in Django settings as pytest can't resolve the hostname
+    networks:
+      testing_net:
+        ipv4_address: 172.20.0.2
+
+networks:
+  testing_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
