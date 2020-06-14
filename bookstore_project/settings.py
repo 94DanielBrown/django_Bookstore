@@ -27,12 +27,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'debug_toolbar',
 
 
     # Local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'books.apps.BooksConfig',
+    'payments.apps.PaymentsConfig',
 
     # Third party
     'crispy_forms',
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,6 +55,17 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG == 1:
+    DEBUG_TOOLBAR_CONFIG = {
+        "SHOW_TOOLBAR_CALLBACK": lambda request: True,
+    }
+
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
 
 ROOT_URLCONF = 'bookstore_project.urls'
 
@@ -163,7 +177,9 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 
 
-# "client_id": "157999642977-vb48l9cb6m0pqto07b16uthkc6srs2gn
-# .apps.googleusercontent.com",
-# "secret": "msMUJgVZYIcfuiSAG5G0b1Qp",
-# "key": "",
+# Stripe config
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = "sk_test_51GtGlcEylJYmrPP4EsGTgLwkbD7eroYbHFysIEMYMnj0DLByXMDFTM0NknqfRTkJqksEyu0LkS8ATOamotxqA6uB006IlzsvM9"
+# stripe_secret_key_file = os.environ.get('STRIPE_SECRET_KEY_FILE')
+# file = open(stripe_secret_key_file, 'r')
+# STRIPE_SECRET_KEY = file.read()

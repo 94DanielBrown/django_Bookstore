@@ -8,6 +8,10 @@ services:
       - SECRET_KEY=f2(8-sa(2cwfoy$trgp)(__esbfd*$$*6wgzum0@y9)nplk99#o
         # Double dollar $$ used to represent $ 
       - DEBUG=1
+      - STRIPE_PUBLISHABLE_KEY=pk_test_51GtGlcEylJYmrPP4NTTVHyPpjPuzDniIYQguDWcyaROnp2T9cTm0N7oxkWOcPkIRG72AW1gJ2pMaDmjK95GYsrzw00zSevTkeB
+      - STRIPE_SECRET_KEY_FILE=/run/secrets/stripe_secret_key
+    secrets:
+      - stripe_secret_key
     volumes:
       - .:/code
     ports:
@@ -37,3 +41,8 @@ networks:
       driver: default
       config:
         - subnet: 172.20.0.0/16
+
+secrets:
+  stripe_secret_key:
+    file:
+      stripe_secret_key.txt
