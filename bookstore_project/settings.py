@@ -188,8 +188,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 # Stripe config
 STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
-STRIPE_SECRET_KEY = "sk_test_51GtGlcEylJYmrPP4EsGTgLwkbD7eroYbHFysIEMYMnj0DLBy
-XMDFTM0NknqfRTkJqksEyu0LkS8ATOamotxqA6uB006IlzsvM9"
+STRIPE_SECRET_KEY = "sk_test_51GtGlcEylJYmrPP4EsGTgLwkbD7eroYbHFysIEMYMnj0DLByXMDFTM0NknqfRTkJqksEyu0LkS8ATOamotxqA6uB006IlzsvM9"
 # stripe_secret_key_file = os.environ.get('STRIPE_SECRET_KEY_FILE')
 # file = open(stripe_secret_key_file, 'r')
 # STRIPE_SECRET_KEY = file.read()
