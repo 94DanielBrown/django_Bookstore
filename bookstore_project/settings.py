@@ -1,12 +1,21 @@
 # Django settings for bookstore_project project.
 import os
 
+ENVIRONMENT = os.environ.get('ENVIRONMENT', default='production')
+
+if ENVIRONMENT == 'production':
+    SECURE_BROWSER_XSS_FILTER = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -179,7 +188,8 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 # Stripe config
 STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
-STRIPE_SECRET_KEY = "sk_test_51GtGlcEylJYmrPP4EsGTgLwkbD7eroYbHFysIEMYMnj0DLByXMDFTM0NknqfRTkJqksEyu0LkS8ATOamotxqA6uB006IlzsvM9"
+STRIPE_SECRET_KEY = "sk_test_51GtGlcEylJYmrPP4EsGTgLwkbD7eroYbHFysIEMYMnj0DLBy
+XMDFTM0NknqfRTkJqksEyu0LkS8ATOamotxqA6uB006IlzsvM9"
 # stripe_secret_key_file = os.environ.get('STRIPE_SECRET_KEY_FILE')
 # file = open(stripe_secret_key_file, 'r')
 # STRIPE_SECRET_KEY = file.read()

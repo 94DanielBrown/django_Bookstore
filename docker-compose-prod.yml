@@ -8,42 +8,29 @@ services:
       - ENVIRONMENT=development
       - SECRET_KEY=f2(8-sa(2cwfoy$trgp)(__esbfd*$$*6wgzum0@y9)nplk99#o
         # Double dollar $$ used to represent $ 
-      - DEBUG=1
+      - DEBUG=0
       - STRIPE_PUBLISHABLE_KEY=pk_test_51GtGlcEylJYmrPP4NTTVHyPpjPuzDniIYQguDWcyaROnp2T9cTm0N7oxkWOcPkIRG72AW1gJ2pMaDmjK95GYsrzw00zSevTkeB
       - STRIPE_SECRET_KEY_FILE=/run/secrets/stripe_secret_key
     secrets:
       - stripe_secret_key
-    volumes:
-      - .:/code
     ports:
       - 8000:8000
     depends_on:
       - db
-    networks:
-      testing_net:
-        ipv4_address: 172.20.0.3
 
   db:
     image: postgres:11
     environment:
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password_file
+    secrets:
+      - postgres_password_file
     ports:
       - 5432:5432
-    volumes:
-      - ~/docker_volumes/postgres_bookstore:/var/lib/postgresql/data/
-# Set ip so the ip can be set in Django settings as pytest can't resolve the hostname
-    networks:
-      testing_net:
-        ipv4_address: 172.20.0.2
-
-networks:
-  testing_net:
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.20.0.0/16
 
 secrets:
   stripe_secret_key:
     file:
       stripe_secret_key.txt
+  postgres_password_file:
+    file:
+      /secrets/djbookstore_postgres
